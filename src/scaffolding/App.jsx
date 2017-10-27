@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { genAllStats } from './data/abilities/abilities';
+import { genAllStats } from 'character-sheet/abilities/abilities';
 import logo from './logo.svg';
 import './App.css';
 

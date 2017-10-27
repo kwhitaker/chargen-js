@@ -5,6 +5,8 @@
   "devDependencies": {
     "flow-bin": "^0.57.3",
     "flow-typed": "^2.2.1",
+    "node-sass-chokidar": "^0.0.3",
+    "npm-run-all": "^4.1.1",
     "prettier": "^1.7.4",
     "react-scripts": "1.0.14"
   },
@@ -14,10 +16,15 @@
     "react-dom": "^16.0.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "build-css": "NODE_PATH=src/  node-sass-chokidar src/ -o src/",
+    "watch-css":
+      "NODE_PATH=src/ yarn build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
+    "start-js": "NODE_PATH=src/ react-scripts start",
+    "start": "NODE_PATH=src/  npm-run-all -p watch-css start-js",
+    "build": "NODE_PATH=src/  npm run build-css && react-scripts build",
+    "test": "NODE_PATH=src/  react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "flow": "flow"
+    "flow": "flow",
+    "clean": "rm -rf build"
   }
 }
