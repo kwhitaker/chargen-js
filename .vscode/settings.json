@@ -3,5 +3,13 @@
   "editor.formatOnSave": true,
   "javascript.format.enable": false,
   "javascript.validate.enable": false,
-  "prettier.singleQuote": true
+  "prettier.singleQuote": true,
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/*.css": true
+  }
 }

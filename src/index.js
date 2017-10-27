@@ -2,7 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './scaffolding/App';
+import App from './scaffolding/app';
 import registerServiceWorker from './registerServiceWorker';
 
 const elem: any = document.getElementById('root');

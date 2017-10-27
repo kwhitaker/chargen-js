@@ -1,0 +1,24 @@
+.abilities {
+  margin: 0;
+  padding: 0.5rem;
+  text-align: left;
+  background-color: black;
+  color: white;
+
+  .ability {
+    display: inline-block;
+    margin: 0 5px 0.5rem 0;
+    width: 60px;
+    text-transform: uppercase;
+  }
+
+  .roll {
+    display: inline;
+    margin: 0;
+
+    &:after {
+      content: '\a';
+      white-space: pre;
+    }
+  }
+}
