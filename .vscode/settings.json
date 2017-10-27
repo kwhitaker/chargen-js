@@ -1,0 +1,7 @@
+{
+  "flow.useNPMPackagedFlow": true,
+  "editor.formatOnSave": true,
+  "javascript.format.enable": false,
+  "javascript.validate.enable": false,
+  "prettier.singleQuote": true
+}
