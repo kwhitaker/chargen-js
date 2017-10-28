@@ -16,13 +16,13 @@
     "react-dom": "^16.0.0"
   },
   "scripts": {
-    "build-css": "NODE_PATH=src/  node-sass-chokidar src/ -o src/",
+    "build-css": "node-sass-chokidar src/ -o src/",
     "watch-css":
-      "NODE_PATH=src/ yarn build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
-    "start-js": "NODE_PATH=src/ react-scripts start",
-    "start": "NODE_PATH=src/  npm-run-all -p watch-css start-js",
-    "build": "NODE_PATH=src/  npm run build-css && react-scripts build",
-    "test": "NODE_PATH=src/  react-scripts test --env=jsdom",
+      "yarn build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
+    "start-js": "react-scripts start",
+    "start": "npm-run-all -p watch-css start-js",
+    "build": "npm run build-css && react-scripts build",
+    "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "flow": "flow",
     "clean": "rm -rf build"

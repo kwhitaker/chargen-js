@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import CharacterSheet from '../character/character-sheet';
+import CharacterSheet from 'character/character-sheet';
 
 import logo from './logo.svg';
 import './app.css';
