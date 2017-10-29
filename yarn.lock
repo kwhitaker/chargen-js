@@ -3828,6 +3828,10 @@ jest-jasmine2@^20.0.4:
     once "^1.4.0"
     p-map "^1.1.1"
 
+jest-localstorage-mock@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/jest-localstorage-mock/-/jest-localstorage-mock-2.0.1.tgz#6bea41d1d7b70c1725a3d34f8cc261ef6cdb12fa"
+
 jest-matcher-utils@^20.0.3:
   version "20.0.3"
   resolved "https://registry.yarnpkg.com/jest-matcher-utils/-/jest-matcher-utils-20.0.3.tgz#b3a6b8e37ca577803b0832a98b164f44b7815612"
@@ -4161,6 +4165,10 @@ locate-path@^2.0.0:
   dependencies:
     p-locate "^2.0.0"
     path-exists "^3.0.0"
+
+lockr@^0.8.4:
+  version "0.8.4"
+  resolved "https://registry.yarnpkg.com/lockr/-/lockr-0.8.4.tgz#7614f9c7c98a60bc4ac45f44567d1d03d8fb493c"
 
 lodash._reinterpolate@~3.0.0:
   version "3.0.0"
