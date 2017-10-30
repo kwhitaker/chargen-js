@@ -1,9 +1,12 @@
 //@flow
 import Lockr from 'lockr';
-import { find, reject, propEq } from 'ramda';
+import { append, find, findIndex, reject, pipe, propEq, update } from 'ramda';
 import type { Character } from 'character/types.js';
 
 const hasId = propEq('id');
+const cSet = (key: string) => (val: number | string | Array<any> | Object) =>
+  Lockr.set(key, val);
+const setChars = cSet('characters');
 
 Lockr.prefix = 'chargen';
 
@@ -13,14 +16,17 @@ export const getCharacters: () => Character[] = () =>
 export const getCharacter: (id: string) => Character = id =>
   find(hasId(id), getCharacters());
 
-export const createCharacter: (c: Character) => void = char => {
-  const existing = getCharacters();
-  const updated = existing.concat(char);
-  Lockr.set('characters', updated);
+export const createCharacter: (c: Character) => void = char =>
+  pipe(getCharacters, append(char), setChars)(char);
+
+export const updateCharacter: (c: Character) => void = char => {
+  const chars = getCharacters();
+  const idx = findIndex(hasId(char.id), chars);
+  if (idx === -1) {
+    return;
+  }
+  setChars(update(idx, char, chars));
 };
 
-export const deleteCharacter: (id: string) => void = id => {
-  const existing = getCharacters();
-  const updated = reject(hasId(id), existing);
-  Lockr.set('characters', updated);
-};
+export const deleteCharacter: (id: string) => (c: Character) => void = id =>
+  pipe(getCharacters, reject(hasId(id)), setChars)(id);
