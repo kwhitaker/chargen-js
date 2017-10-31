@@ -39,14 +39,14 @@ export const genAllStats = (generous?: boolean) =>
   keys(abilities).map(s => genStat(s, generous));
 
 // TODO figure out why these two types are terrible
-const findMod: any = (roll: number) =>
+const findMod: (r: number) => (m: AbilityMod) => ?number = (roll: number) =>
   pipe(
     prop('values'),
     find(([min, max, mod]) => roll >= min && roll <= max),
     (n: number[]) => (n && last(n)) || undefined
   );
 
-const lastOfFirst: any = pipe(head, last);
+const lastOfFirst = pipe((head: any), last);
 
 export const getModsByRoll = (stat: string) => (roll: number) => {
   const ability = abilities[stat];
