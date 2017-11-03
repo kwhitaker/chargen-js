@@ -15,7 +15,7 @@ describe('generateRandomChar', () => {
     expect(result.name).toEqual('Random Character');
     expect(result.xp).toEqual(0);
     expect(result.abilities).toHaveLength(6);
-    expect(result.class).toEqual('fighter');
+    expect(result.class).toEqual('cleric');
   });
 
   test('it generates a level 1 character if no level is given', () => {

@@ -1,8 +1,9 @@
 //@flow
-import { assoc, pipe } from 'ramda';
+import { assoc, pipe, prop } from 'ramda';
 import v4 from 'uuid';
-import type { Character } from './types';
 import { genAllStats } from './abilities/abilities';
+import { availableClasses } from './classes/character-classes';
+import type { Character } from './types';
 import type { StatTuple } from './abilities/types';
 
 type SetCharProp<T> = (prop: T) => (c: Character) => any;
@@ -31,8 +32,8 @@ export const generateRandomChar = (level?: number = 1): Character =>
   pipe(
     bootstrapChar,
     setName('Random Character'),
-    setLevel(level),
-    setXp(0),
     setAbilities(genAllStats()),
-    setClass('fighter')
+    c => setClass(availableClasses(c.abilities)[0].name)(c),
+    setLevel(level),
+    setXp(0)
   )(level);

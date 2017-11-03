@@ -7,6 +7,6 @@ export type Character = {
   playerName: ?string,
   level: ?number,
   xp: ?number,
-  abilities: ?StatTuple,
+  abilities: ?(StatTuple[]),
   class: ?string
 };
