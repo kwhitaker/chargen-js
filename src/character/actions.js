@@ -1,8 +1,13 @@
 //@flow
-import { assoc, pipe, prop } from 'ramda';
+import { assoc, isNil, pipe, prop } from 'ramda';
 import v4 from 'uuid';
 import { genAllStats } from './abilities/abilities';
-import { availableClasses } from './classes/character-classes';
+import {
+  availableClasses,
+  getCharClass,
+  getXp
+} from './classes/character-classes';
+import { genRandomInt } from '../lib/utils/random-int';
 import type { Character } from './types';
 import type { StatTuple } from './abilities/types';
 
@@ -28,12 +33,30 @@ export const bootstrapChar: () => Character = () => ({
   class: undefined
 });
 
-export const generateRandomChar = (level?: number = 1): Character =>
+const setRandomClass = (c: Character): Character => {
+  if (isNil(c.abilities)) {
+    return c;
+  }
+  const avail = availableClasses(c.abilities);
+  const cClass = avail[genRandomInt(0, avail.length - 1)];
+  return setClass(cClass.name)(c);
+};
+
+const setXpFromRandomClass = (c: Character): Character => {
+  if (isNil(c.class) || isNil(c.level)) {
+    return c;
+  }
+  const cClass = getCharClass(c.class);
+  // $FlowFixMe
+  return setXp(getXp(cClass)(c.level))(c);
+};
+
+export const generateRandomChar = (level?: number = 0): Character =>
   pipe(
     bootstrapChar,
     setName('Random Character'),
     setAbilities(genAllStats()),
-    c => setClass(availableClasses(c.abilities)[0].name)(c),
+    setRandomClass,
     setLevel(level),
-    setXp(0)
+    setXpFromRandomClass
   )(level);

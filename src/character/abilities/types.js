@@ -2,8 +2,10 @@
 export type AbilityModTuple = [number, number, number | string];
 
 export type AbilityMod = {
+  //$FlowFixMe
   affects: string,
-  values: Array<AbilityModTuple>
+  //$FlowFixMe
+  values: AbilityModTuple[]
 };
 
 export type Ability = { fullName: string, mods: Array<AbilityMod> };

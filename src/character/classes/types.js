@@ -12,7 +12,7 @@ type ClassFeature = {
   list?: Array<any>
 };
 
-type Level = [number, number, number];
+export type Level = [number, number, number];
 
 export type CharacterClass = {
   name: string,

@@ -11,6 +11,8 @@ import {
   sum,
   times
 } from 'ramda';
+import { genRandomInt } from '../../lib/utils/random-int';
+
 import type {
   AbilityModTuple,
   AbilityMod,
@@ -19,9 +21,6 @@ import type {
 } from './types';
 
 const abilities: Abilities = require('../../rules/labyrinth-lord/abilities.json');
-
-const genRandomInt = (min: number, max: number) =>
-  Math.floor(max - Math.random() * (max - min));
 
 export const rollStat = () => genRandomInt(3, 18);
 
@@ -38,12 +37,12 @@ export const genStat = (stat: string, generous: ?boolean): StatTuple => [
 export const genAllStats = (generous?: boolean) =>
   keys(abilities).map(s => genStat(s, generous));
 
-// TODO figure out why these two types are terrible
+const maybeMod = (n: ?(number[])) => (n ? last(n) : undefined);
 const findMod: (r: number) => (m: AbilityMod) => ?number = (roll: number) =>
   pipe(
     prop('values'),
     find(([min, max, mod]) => roll >= min && roll <= max),
-    (n: number[]) => (n && last(n)) || undefined
+    maybeMod
   );
 
 const lastOfFirst = pipe((head: any), last);

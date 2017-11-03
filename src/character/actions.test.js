@@ -13,13 +13,11 @@ describe('generateRandomChar', () => {
     const result = generateRandomChar(10);
     expect(result.level).toEqual(10);
     expect(result.name).toEqual('Random Character');
-    expect(result.xp).toEqual(0);
     expect(result.abilities).toHaveLength(6);
-    expect(result.class).toEqual('cleric');
   });
 
   test('it generates a level 1 character if no level is given', () => {
     const result = generateRandomChar();
-    expect(result.level).toEqual(1);
+    expect(result.level).toEqual(0);
   });
 });

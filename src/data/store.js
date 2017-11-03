@@ -1,7 +1,7 @@
 //@flow
 import Lockr from 'lockr';
 import { append, find, findIndex, reject, pipe, propEq, update } from 'ramda';
-import type { Character } from 'character/types.js';
+import type { Character } from '../character/types';
 
 const hasId = propEq('id');
 const cSet = (key: string) => (val: number | string | Array<any> | Object) =>
@@ -13,13 +13,13 @@ Lockr.prefix = 'chargen';
 export const getCharacters: () => Character[] = () =>
   Lockr.get('characters') || [];
 
-export const getCharacter: (id: string) => Character = id =>
+export const getCharacter = (id: string): ?Character =>
   find(hasId(id), getCharacters());
 
-export const createCharacter: (c: Character) => void = char =>
+export const createCharacter = (char: Character) =>
   pipe(getCharacters, append(char), setChars)(char);
 
-export const updateCharacter: (c: Character) => void = char => {
+export const updateCharacter = (char: Character) => {
   const chars = getCharacters();
   const idx = findIndex(hasId(char.id), chars);
   if (idx === -1) {

@@ -1,13 +1,13 @@
 //@flow
 import React, { Component } from 'react';
 import v4 from 'uuid';
-import type { Character } from 'character/types';
+import type { Character } from '../character/types';
 import {
   getCharacter,
   getCharacters,
   createCharacter,
   deleteCharacter
-} from 'data/store';
+} from '../data/store';
 
 import './app.css';
 
@@ -46,7 +46,9 @@ class App extends Component<any, AppState> {
     </li>
   );
 
-  onClickCharacter = (id: string) => alert(getCharacter(id).name);
+  onClickCharacter = (id: string) => {
+    alert(`clicked ${id}`);
+  };
 
   onClickCreate = () => {
     const id = v4();
@@ -54,7 +56,12 @@ class App extends Component<any, AppState> {
 
     createCharacter({
       id,
-      name
+      name,
+      level: 0,
+      xp: undefined,
+      playerName: undefined,
+      class: undefined,
+      abilities: undefined
     });
     this.fetchData();
   };

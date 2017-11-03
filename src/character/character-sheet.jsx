@@ -14,7 +14,7 @@ class CharacterSheet extends Component<
   render() {
     return (
       <div className="character-sheet">
-        <AbilitiesList statsAreGenerous={false} />
+        {/* <AbilitiesList statsAreGenerous={false} /> */}
       </div>
     );
   }

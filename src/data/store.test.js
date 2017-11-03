@@ -2,14 +2,19 @@
 import v4 from 'uuid';
 import Lockr from 'lockr';
 import { assoc } from 'ramda';
-import type { Character } from 'characters/types';
+import type { Character } from '../character/types';
 import * as characters from './store';
 
 Lockr.prefix = 'chargen';
 
 const testCharacter: Character = {
   id: v4(),
-  name: 'Foobar'
+  name: 'Foobar',
+  level: undefined,
+  abilities: undefined,
+  playerName: undefined,
+  class: undefined,
+  xp: undefined
 };
 
 describe('characters', () => {
@@ -63,8 +68,9 @@ describe('characters', () => {
 
     test('it returns the existing characters if it is given an unknown id', () => {
       const expected = [testCharacter];
+      const updated = assoc('id', 'foo', testCharacter);
       characters.createCharacter(testCharacter);
-      characters.updateCharacter('foo');
+      characters.updateCharacter(updated);
       expect(characters.getCharacters()).toEqual(expected);
     });
   });
