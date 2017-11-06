@@ -14,7 +14,9 @@ const testCharacter: Character = {
   abilities: undefined,
   playerName: undefined,
   class: undefined,
-  xp: undefined
+  xp: undefined,
+  alignment: undefined,
+  money: undefined
 };
 
 describe('characters', () => {

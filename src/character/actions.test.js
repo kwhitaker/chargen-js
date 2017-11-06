@@ -14,9 +14,14 @@ describe('generateRandomChar', () => {
     expect(result.level).toEqual(10);
     expect(result.name).toEqual('Random Character');
     expect(result.abilities).toHaveLength(6);
+    expect(result.class).toBeDefined();
+    expect(result.xp).toBeDefined();
+    expect(result.alignment).toBeDefined();
+    //$FlowFixMe
+    expect(result.money.gp).toBeGreaterThanOrEqual(3);
   });
 
-  test('it generates a level 1 character if no level is given', () => {
+  test('it generates a level 0 character if no level is given', () => {
     const result = generateRandomChar();
     expect(result.level).toEqual(0);
   });

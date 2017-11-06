@@ -61,7 +61,9 @@ class App extends Component<any, AppState> {
       xp: undefined,
       playerName: undefined,
       class: undefined,
-      abilities: undefined
+      abilities: undefined,
+      alignment: undefined,
+      money: undefined
     });
     this.fetchData();
   };

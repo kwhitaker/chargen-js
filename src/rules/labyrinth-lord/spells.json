@@ -1,0 +1,74 @@
+{
+  "cleric": [
+    [
+      "cure light wounds",
+      "detect evil",
+      "detect magic",
+      "light",
+      "protection from evil",
+      "purify food and drink",
+      "remove fear",
+      "resist cold"
+    ],
+    [
+      "bless",
+      "find traps",
+      "know alignment",
+      "hold person",
+      "resist fire",
+      "silence 15' radius",
+      "snake charm",
+      "speak with animal"
+    ],
+    [
+      "animal growth",
+      "animate dead",
+      "continual light",
+      "cure disease",
+      "dispel magic",
+      "locate object",
+      "remove curse",
+      "striking"
+    ],
+    [
+      "create food and water",
+      "cure serious wounds",
+      "detect lie",
+      "lower water",
+      "neutralize poison",
+      "protection from evil 10' radius",
+      "speak with plants",
+      "sticks to snakes"
+    ],
+    [
+      "commune",
+      "cure critical wounds",
+      "dispel evil",
+      "flame strike",
+      "insect plague",
+      "quest",
+      "raise dead",
+      "true seeing"
+    ],
+    [
+      "animate objects",
+      "blade barrier",
+      "conjure animals",
+      "find the path",
+      "heal",
+      "part water",
+      "stone tell",
+      "word of recall"
+    ],
+    [
+      "control weather",
+      "earthquake",
+      "holy word",
+      "regenerate",
+      "restoration",
+      "resurrection",
+      "symbol",
+      "wind walk"
+    ]
+  ]
+}

@@ -5,7 +5,7 @@ export type ClassReq = [Stat, number];
 
 type SavingThrow = [number, number, number, number, number, number, number];
 
-type ClassFeature = {
+export type ClassFeature = {
   name: string,
   pageNum: number,
   table?: Array<string | number>,
