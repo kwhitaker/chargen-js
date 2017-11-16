@@ -12,7 +12,7 @@ describe('getRandomSpellAtLevel', () => {
   });
 });
 
-describe('getSpellList', () => {
+describe('getSpellTable', () => {
   it('returns a spell table when given a class which has spells', () => {
     const result = getSpellTable('cleric');
     expect(result).toBeDefined();
@@ -20,6 +20,11 @@ describe('getSpellList', () => {
 
   it('returns undefined if a provided class has no spells', () => {
     const result = getSpellTable('dwarf');
+    expect(result).toBeUndefined();
+  });
+
+  it('returns undefined if it receives an invalid character class', () => {
+    const result = getSpellTable('foo');
     expect(result).toBeUndefined();
   });
 });
