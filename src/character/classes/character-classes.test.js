@@ -38,7 +38,7 @@ describe('meetsAllReqs', () => {
 
 describe('availableClasses', () => {
   test('it returns a list of classes based on stats', () => {
-    let expected = ['cleric', 'dwarf', 'fighter'];
+    let expected = ['cleric', 'dwarf', 'fighter', 'halfling', 'magic-user'];
     let stats = [['con', 9], ['int', 3]];
     let result = classes.availableClasses(stats);
     // $FlowFixMe
@@ -50,7 +50,7 @@ describe('availableClasses', () => {
     // $FlowFixMe
     expect(pluck('name', result)).toEqual(expected);
 
-    expected = ['cleric', 'fighter'];
+    expected = ['cleric', 'fighter', 'magic-user'];
     stats = [['con', 3], ['int', 3]];
     result = classes.availableClasses(stats);
     // $FlowFixMe
