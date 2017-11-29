@@ -1,5 +1,15 @@
 //@flow
-import { all, find, head, pipe, propEq, prop } from 'ramda';
+import {
+  all,
+  find,
+  findLast,
+  head,
+  last,
+  path,
+  pipe,
+  propEq,
+  prop
+} from 'ramda';
 import type { ClassReq, CharacterClass, Level } from './types';
 import type { StatTuple } from '../abilities/types';
 
@@ -32,3 +42,15 @@ export const getXp = (cClass: CharacterClass) => (level: number): number =>
     find(([xp, lvl, hd]: Level) => lvl === level),
     maybeXp
   )(cClass);
+
+export const getThaco = (cClass: CharacterClass) => (level: number): number[] =>
+  // $FlowFixMe
+  path(['thaco', level - 1])(cClass);
+
+export const getSaves = (cClass: CharacterClass) => (
+  level: number
+): number[] => {
+  const saves = prop('saves', cClass);
+  // $FlowFixMe
+  return findLast(x => x[0] < level)(saves) || last(saves);
+};

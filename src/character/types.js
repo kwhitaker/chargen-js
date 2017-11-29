@@ -25,5 +25,7 @@ export type Character = {
   spells?: SpellList,
   money: ?{
     [key: Currency]: number
-  }
+  },
+  thaco: ?(number[]),
+  saves: ?(number[])
 };

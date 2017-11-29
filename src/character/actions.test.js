@@ -1,6 +1,7 @@
 //@flow
-import { all, isNil, omit, values } from 'ramda';
+import { all, isNil, findLast, omit, values } from 'ramda';
 import { bootstrapChar, generateRandomChar } from './actions';
+import { getCharClass } from './classes/character-classes';
 
 test('bootStrapChar generates a character w/ a random id and nothing else', () => {
   const result = bootstrapChar();
@@ -19,7 +20,15 @@ describe('generateRandomChar', () => {
     expect(result.alignment).toBeDefined();
     //$FlowFixMe
     expect(result.money.gp).toBeGreaterThanOrEqual(3);
-    // Can't test spells, since this is a random assignment
+
+    //$FlowFixMe
+    const charClass = getCharClass(result.class);
+    //$FlowFixMe
+    expect(result.thaco).toEqual(charClass.thaco[result.level - 1]);
+    //$FlowFixMe
+    const expectedSaves = findLast(x => x[0] < result.level)(charClass.saves);
+    expect(result.saves).toEqual(expectedSaves);
+    // TODO add spells test
   });
 
   test('it generates a level 0 character if no level is given', () => {

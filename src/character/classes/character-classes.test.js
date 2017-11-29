@@ -1,5 +1,5 @@
 //@flow
-import { pluck } from 'ramda';
+import { findLast, last, pluck } from 'ramda';
 import * as classes from './character-classes';
 import type { CharacterClass } from './types';
 
@@ -66,13 +66,13 @@ describe('availableClasses', () => {
 });
 
 describe('getCharClass', () => {
-  test('it returns a character class based on the name', () => {
+  test('returns a character class based on the name', () => {
     expect(classes.getCharClass('elf')).toEqual(charClasses[2]);
   });
 });
 
 describe('getXp', () => {
-  test('it returns an expected XP value based on level', () => {
+  test('returns an expected XP value based on level', () => {
     const level = 5;
     const cleric = classes.getCharClass('cleric');
 
@@ -82,10 +82,41 @@ describe('getXp', () => {
     expect(classes.getXp(cleric)(level)).toEqual(expected);
   });
 
-  test('it returns 0 if the level is out of bounds', () => {
+  test('returns 0 if the level is out of bounds', () => {
     const level = 100;
     const cleric = classes.getCharClass('cleric');
     // $FlowFixMe
     expect(classes.getXp(cleric)(level)).toEqual(0);
+  });
+});
+
+describe('getThaco', () => {
+  test('returns a thaco array for a class, given a level', () => {
+    const level = 5;
+    const cleric = classes.getCharClass('cleric');
+    // $FlowFixMe
+    const expected = cleric.thaco[level - 1];
+    // $FlowFixMe
+    expect(classes.getThaco(cleric)(level)).toEqual(expected);
+  });
+});
+
+describe('getSaves', () => {
+  test('returns the saves array for a class, given a level', () => {
+    const level = 10;
+    const cleric = classes.getCharClass('cleric');
+    // $FlowFixMe
+    const expected = findLast(x => x[0] < level)(cleric.saves);
+    // $FlowFixMe
+    expect(classes.getSaves(cleric)(level)).toEqual(expected);
+  });
+
+  test('returns the last save array if the level exceeds the range allowed', () => {
+    const level = 22;
+    const cleric = classes.getCharClass('cleric');
+    // $FlowFixMe
+    const expected = last(cleric.saves);
+    // $FlowFixMe
+    expect(classes.getSaves(cleric)(level)).toEqual(expected);
   });
 });

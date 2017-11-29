@@ -5,6 +5,8 @@ import { genAllStats } from './abilities/abilities';
 import {
   availableClasses,
   getCharClass,
+  getSaves,
+  getThaco,
   getXp
 } from './classes/character-classes';
 import { generateSpellBook } from './spells/spells';
@@ -28,6 +30,9 @@ export const setMoney: SetCharProp<{ [key: Currency]: number }> = currency =>
   assocPath(['money', keys(currency)[0]])(values(currency)[0]);
 export const setSpells: SetCharProp<SpellBook> = spells =>
   assoc('spells')(spells);
+export const setThaco: SetCharProp<number[]> = thacoArr =>
+  assoc('thaco')(thacoArr);
+export const setSaves: SetCharProp<number[]> = saves => assoc('saves')(saves);
 
 const setLevel1 = setLevel(1);
 
@@ -41,7 +46,8 @@ export const bootstrapChar: () => Character = () => ({
   class: undefined,
   alignment: undefined,
   money: undefined,
-  spells: undefined
+  thaco: undefined,
+  saves: undefined
 });
 
 const setRandomClass = (c: Character): Character => {
@@ -74,6 +80,26 @@ const setRandomSpells = (c: Character): Character =>
   // $FlowFixMe
   setSpells(generateSpellBook(c.class)(c.level))(c);
 
+const setThacoForRandomCharacter = (c: Character): Character => {
+  if (isNil(c.class) || isNil(c.level)) {
+    return c;
+  }
+
+  const cClass = getCharClass(c.class);
+  // $FlowFixMe
+  return setThaco(getThaco(cClass)(c.level))(c);
+};
+
+const setSavesForRandomCharacter = (c: Character): Character => {
+  if (isNil(c.class) || isNil(c.level)) {
+    return c;
+  }
+
+  const cClass = getCharClass(c.class);
+  // $FlowFixMe
+  return setSaves(getSaves(cClass)(c.level))(c);
+};
+
 export const generateRandomChar = (level?: number = 0): Character =>
   pipe(
     bootstrapChar,
@@ -84,6 +110,8 @@ export const generateRandomChar = (level?: number = 0): Character =>
     setXpFromRandomClass,
     // $FlowFixMe
     setRandomAlignment,
+    setThacoForRandomCharacter,
+    setSavesForRandomCharacter,
     setRandomStartingGold,
     setRandomSpells
   )(level);
