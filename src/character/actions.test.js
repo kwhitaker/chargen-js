@@ -19,6 +19,7 @@ describe('generateRandomChar', () => {
     expect(result.alignment).toBeDefined();
     //$FlowFixMe
     expect(result.money.gp).toBeGreaterThanOrEqual(3);
+    // Can't test spells, since this is a random assignment
   });
 
   test('it generates a level 0 character if no level is given', () => {

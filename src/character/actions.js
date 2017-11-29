@@ -7,9 +7,11 @@ import {
   getCharClass,
   getXp
 } from './classes/character-classes';
+import { generateSpellBook } from './spells/spells';
 import { genRandomInt } from '../lib/utils/random-int';
 import type { Alignment, Character, Currency } from './types';
 import type { StatTuple } from './abilities/types';
+import type { SpellBook } from './spells/types';
 
 type SetCharProp<T> = (prop: T) => (c: Character) => any; // Should return Character, but the types hate it for some reason
 export const setName: SetCharProp<string> = name => assoc('name')(name);
@@ -24,6 +26,8 @@ export const setAlignment: SetCharProp<Alignment> = align =>
   assoc('alignment')(align);
 export const setMoney: SetCharProp<{ [key: Currency]: number }> = currency =>
   assocPath(['money', keys(currency)[0]])(values(currency)[0]);
+export const setSpells: SetCharProp<SpellBook> = spells =>
+  assoc('spells')(spells);
 
 const setLevel1 = setLevel(1);
 
@@ -36,7 +40,8 @@ export const bootstrapChar: () => Character = () => ({
   abilities: undefined,
   class: undefined,
   alignment: undefined,
-  money: undefined
+  money: undefined,
+  spells: undefined
 });
 
 const setRandomClass = (c: Character): Character => {
@@ -65,6 +70,10 @@ export const setRandomStartingGold = (c: Character): Character => {
   return setMoney({ gp })(c);
 };
 
+const setRandomSpells = (c: Character): Character =>
+  // $FlowFixMe
+  setSpells(generateSpellBook(c.class)(c.level))(c);
+
 export const generateRandomChar = (level?: number = 0): Character =>
   pipe(
     bootstrapChar,
@@ -75,5 +84,6 @@ export const generateRandomChar = (level?: number = 0): Character =>
     setXpFromRandomClass,
     // $FlowFixMe
     setRandomAlignment,
-    setRandomStartingGold
+    setRandomStartingGold,
+    setRandomSpells
   )(level);
