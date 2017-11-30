@@ -5,6 +5,7 @@ import { genAllStats } from './abilities/abilities';
 import {
   availableClasses,
   getCharClass,
+  getHdForLevel,
   getSaves,
   getThaco,
   getXp
@@ -33,6 +34,7 @@ export const setSpells: SetCharProp<SpellBook> = spells =>
 export const setThaco: SetCharProp<number[]> = thacoArr =>
   assoc('thaco')(thacoArr);
 export const setSaves: SetCharProp<number[]> = saves => assoc('saves')(saves);
+export const setHp: SetCharProp<number> = hp => assoc('hp')(hp);
 
 const setLevel1 = setLevel(1);
 
@@ -47,7 +49,8 @@ export const bootstrapChar: () => Character = () => ({
   alignment: undefined,
   money: undefined,
   thaco: undefined,
-  saves: undefined
+  saves: undefined,
+  hp: undefined
 });
 
 const setRandomClass = (c: Character): Character => {
@@ -100,6 +103,21 @@ const setSavesForRandomCharacter = (c: Character): Character => {
   return setSaves(getSaves(cClass)(c.level))(c);
 };
 
+const generateHp = (c: Character): Character => {
+  if (isNil(c.class) || isNil(c.level)) {
+    return c;
+  }
+
+  const cClass = getCharClass(c.class);
+  // $FlowFixMe
+  const hd = getHdForLevel(cClass)(c.level);
+  const hp = hd.reduce(
+    (sum, hd, idx) => (idx >= 9 ? sum + hd : sum + genRandomInt(1, cClass.hd)),
+    0
+  );
+  return setHp(hp)(c);
+};
+
 export const generateRandomChar = (level?: number = 0): Character =>
   pipe(
     bootstrapChar,
@@ -110,6 +128,7 @@ export const generateRandomChar = (level?: number = 0): Character =>
     setXpFromRandomClass,
     // $FlowFixMe
     setRandomAlignment,
+    generateHp,
     setThacoForRandomCharacter,
     setSavesForRandomCharacter,
     setRandomStartingGold,

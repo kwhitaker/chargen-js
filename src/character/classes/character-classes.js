@@ -5,10 +5,12 @@ import {
   findLast,
   head,
   last,
+  map,
   path,
   pipe,
   propEq,
-  prop
+  prop,
+  take
 } from 'ramda';
 import type { ClassReq, CharacterClass, Level } from './types';
 import type { StatTuple } from '../abilities/types';
@@ -54,3 +56,8 @@ export const getSaves = (cClass: CharacterClass) => (
   // $FlowFixMe
   return findLast(x => x[0] < level)(saves) || last(saves);
 };
+
+export const getHdForLevel = (cClass: CharacterClass) => (
+  level: number
+  // $FlowFixMe
+): number[] => pipe(prop('progression'), take(level), map(last))(cClass) || [];

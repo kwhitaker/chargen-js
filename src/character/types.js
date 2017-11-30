@@ -27,5 +27,6 @@ export type Character = {
     [key: Currency]: number
   },
   thaco: ?(number[]),
-  saves: ?(number[])
+  saves: ?(number[]),
+  hp: ?number
 };

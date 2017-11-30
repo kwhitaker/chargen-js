@@ -18,6 +18,7 @@ describe('generateRandomChar', () => {
     expect(result.class).toBeDefined();
     expect(result.xp).toBeDefined();
     expect(result.alignment).toBeDefined();
+    expect(result.hp).toBeGreaterThan(0);
     //$FlowFixMe
     expect(result.money.gp).toBeGreaterThanOrEqual(3);
 

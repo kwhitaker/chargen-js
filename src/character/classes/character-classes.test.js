@@ -120,3 +120,18 @@ describe('getSaves', () => {
     expect(classes.getSaves(cleric)(level)).toEqual(expected);
   });
 });
+
+describe('getHdForLevel', () => {
+  test('returns an HD array for a class, given a level', () => {
+    const level = 10;
+    const cleric = classes.getCharClass('cleric');
+    // $FlowFixMe
+    const result = classes.getHdForLevel(cleric)(level);
+    expect(result.length).toEqual(level);
+
+    result.forEach(i => {
+      // $FlowFixMe
+      expect(i).toEqual(cleric.progression[i - 1][2]);
+    });
+  });
+});
