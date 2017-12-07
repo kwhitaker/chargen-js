@@ -27,7 +27,7 @@ describe('generateRandomChar', () => {
     //$FlowFixMe
     expect(result.thaco).toEqual(charClass.thaco[result.level - 1]);
     //$FlowFixMe
-    const expectedSaves = findLast(x => x[0] < result.level)(charClass.saves);
+    const expectedSaves = findLast(x => x[0] <= result.level)(charClass.saves);
     expect(result.saves).toEqual(expectedSaves);
     if (result.class === 'thief' || result.class === 'halfling') {
       //$FlowFixMe

@@ -199,7 +199,7 @@ class App extends Component<any, AppState> {
     }
 
     const elems = features.map(({ name, list = [], pageNum }) => (
-      <li key="name" className="feature">
+      <li key={name} className="feature">
         {name} (page: {pageNum})
         {isEmpty(list) ? null : (
           <p className="feature-values">{list.join(', ')}</p>
