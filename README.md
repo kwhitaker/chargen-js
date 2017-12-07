@@ -7,11 +7,11 @@ libraries and technology, and I don't know how much work I'll be doing on it aft
 
 ## Things Which Could be Added/Fixed
 
-[ ] Fix `//$FlowFixMe` areas. These seem to be related to the ramda typings and potential empty return values.
-[ ] Add ability to generate characters of arbitrary levels. The data code is there, but not the UI.
-[ ] Pick equipment for generated characters.
-[ ] Clean-up other areas of the code which I know need some love.
-[ ] Get a real fav-icon.
-[ ] Write Jest component tests.
+- [ ] Fix `//$FlowFixMe` areas. These seem to be related to the ramda typings and potential empty return values.
+- [ ] Add ability to generate characters of arbitrary levels. The data code is there, but not the UI.
+- [ ] Pick equipment for generated characters.
+- [ ] Clean-up other areas of the code which I know need some love.
+- [ ] Get a real fav-icon.
+- [ ] Write Jest component tests.
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
