@@ -29,6 +29,10 @@ describe('generateRandomChar', () => {
     //$FlowFixMe
     const expectedSaves = findLast(x => x[0] < result.level)(charClass.saves);
     expect(result.saves).toEqual(expectedSaves);
+    if (result.class === 'thief' || result.class === 'halfling') {
+      //$FlowFixMe
+      expect(result.skills).toBeDefined();
+    }
     // TODO add spells test
   });
 

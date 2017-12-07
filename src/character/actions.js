@@ -1,5 +1,5 @@
 //@flow
-import { assoc, assocPath, isNil, keys, pipe, prop, values } from 'ramda';
+import { assoc, assocPath, isNil, keys, pipe, values } from 'ramda';
 import v4 from 'uuid';
 import { genAllStats } from './abilities/abilities';
 import {
@@ -7,6 +7,7 @@ import {
   getCharClass,
   getHdForLevel,
   getSaves,
+  getSkillsForLevel,
   getThaco,
   getXp
 } from './classes/character-classes';
@@ -15,6 +16,7 @@ import { genRandomInt } from '../lib/utils/random-int';
 import type { Alignment, Character, Currency } from './types';
 import type { StatTuple } from './abilities/types';
 import type { SpellBook } from './spells/types';
+import type { Skill } from './classes/types';
 
 type SetCharProp<T> = (prop: T) => (c: Character) => any; // Should return Character, but the types hate it for some reason
 export const setName: SetCharProp<string> = name => assoc('name')(name);
@@ -35,8 +37,8 @@ export const setThaco: SetCharProp<number[]> = thacoArr =>
   assoc('thaco')(thacoArr);
 export const setSaves: SetCharProp<number[]> = saves => assoc('saves')(saves);
 export const setHp: SetCharProp<number> = hp => assoc('hp')(hp);
-
-const setLevel1 = setLevel(1);
+export const setSkills: SetCharProp<Skill[]> = skills =>
+  assoc('skills')(skills);
 
 export const bootstrapChar: () => Character = () => ({
   id: v4(),
@@ -118,6 +120,16 @@ const generateHp = (c: Character): Character => {
   return setHp(hp)(c);
 };
 
+const setSkillsForRandomCharacter = (c: Character): Character => {
+  if (isNil(c.class) || isNil(c.level)) {
+    return c;
+  }
+
+  const cClass = getCharClass(c.class);
+  // $FlowFixMe
+  return setSkills(getSkillsForLevel(cClass)(c.level))(c);
+};
+
 export const generateRandomChar = (level?: number = 0): Character =>
   pipe(
     bootstrapChar,
@@ -131,6 +143,7 @@ export const generateRandomChar = (level?: number = 0): Character =>
     generateHp,
     setThacoForRandomCharacter,
     setSavesForRandomCharacter,
+    setSkillsForRandomCharacter,
     setRandomStartingGold,
     setRandomSpells
   )(level);

@@ -3,7 +3,6 @@ import {
   all,
   find,
   findLast,
-  head,
   last,
   map,
   path,
@@ -12,7 +11,13 @@ import {
   prop,
   take
 } from 'ramda';
-import type { ClassReq, CharacterClass, Level } from './types';
+import type {
+  ClassReq,
+  CharacterClass,
+  Level,
+  Skill,
+  SkillAtLevel
+} from './types';
 import type { StatTuple } from '../abilities/types';
 
 const charClasses: CharacterClass[] = require('../../rules/labyrinth-lord/classes.json');
@@ -54,10 +59,37 @@ export const getSaves = (cClass: CharacterClass) => (
 ): number[] => {
   const saves = prop('saves', cClass);
   // $FlowFixMe
-  return findLast(x => x[0] < level)(saves) || last(saves);
+  return findLast(x => x[0] <= level)(saves) || last(saves);
 };
 
 export const getHdForLevel = (cClass: CharacterClass) => (
   level: number
   // $FlowFixMe
 ): number[] => pipe(prop('progression'), take(level), map(last))(cClass) || [];
+
+const skillForLevel = (level: number) => ({
+  name,
+  table,
+  type
+}: Skill): SkillAtLevel => {
+  const value: number =
+    level > table.length ? table[table.length] : table[level - 1];
+  return {
+    name,
+    value,
+    type
+  };
+};
+
+export const getSkillsForLevel = (cClass: CharacterClass) => (
+  level: number
+): SkillAtLevel[] => {
+  const skills = prop('skills', cClass);
+  if (skills) {
+    const stagedSkills = skillForLevel(level);
+    // $FlowFixMe
+    return skills.map(stagedSkills);
+  } else {
+    return [];
+  }
+};

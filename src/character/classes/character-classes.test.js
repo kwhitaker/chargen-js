@@ -1,5 +1,5 @@
 //@flow
-import { findLast, last, pluck } from 'ramda';
+import { find, findLast, last, pluck } from 'ramda';
 import * as classes from './character-classes';
 import type { CharacterClass } from './types';
 
@@ -103,10 +103,10 @@ describe('getThaco', () => {
 
 describe('getSaves', () => {
   test('returns the saves array for a class, given a level', () => {
-    const level = 10;
+    const level = 1;
     const cleric = classes.getCharClass('cleric');
     // $FlowFixMe
-    const expected = findLast(x => x[0] < level)(cleric.saves);
+    const expected = findLast(x => x[0] <= level)(cleric.saves);
     // $FlowFixMe
     expect(classes.getSaves(cleric)(level)).toEqual(expected);
   });
@@ -132,6 +132,36 @@ describe('getHdForLevel', () => {
     result.forEach(i => {
       // $FlowFixMe
       expect(i).toEqual(cleric.progression[i - 1][2]);
+    });
+  });
+});
+
+describe('getSkillsForLevel', () => {
+  test('returns a flat array of skills at that level', () => {
+    const level = 5;
+    const thief = classes.getCharClass('thief');
+    // $FlowFixMe
+    const result = classes.getSkillsForLevel(thief)(level);
+
+    result.forEach(({ name, value }) => {
+      // $FlowFixMe
+      const skill = find(s => s.name === name, thief.skills);
+      // $FlowFixMe
+      expect(value).toEqual(skill.table[level - 1]);
+    });
+  });
+
+  test('returns the last values if the level exceeds the max', () => {
+    const level = 100;
+    const thief = classes.getCharClass('thief');
+    // $FlowFixMe
+    const result = classes.getSkillsForLevel(thief)(level);
+
+    result.forEach(({ name, value }) => {
+      // $FlowFixMe
+      const skill = find(s => s.name === name, thief.skills);
+      // $FlowFixMe
+      expect(value).toEqual(skill.table[skill.table.length]);
     });
   });
 });

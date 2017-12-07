@@ -1,13 +1,10 @@
 //@flow
-import { assoc, contains, find, pipe, propEq, take, times } from 'ramda';
+import { assoc, find, propOr, take } from 'ramda';
 import * as shuffle from 'shuffle-array';
-import { genRandomInt } from '../../lib/utils/random-int';
 import { getCharClass } from '../classes/character-classes';
 import type { ClassSpells, Spell, SpellBook, SpellList } from './types';
-import type { CharacterClass, ClassFeature } from '../classes/types';
 
 const spells: ClassSpells = require('../../rules/labyrinth-lord/spells.json');
-const charClasses: CharacterClass[] = require('../../rules/labyrinth-lord/classes.json');
 
 const getRandomSpellsFromList = (spellList: SpellList) => (
   count: number = 1
@@ -20,7 +17,7 @@ const spellListAtLevel = (spellLists: SpellList[]) => (
     ? take(lvl, spellLists)
     : take(spellLists.length, spellLists);
 
-const spellFeature = propEq('name', 'spells');
+const spellFeature = propOr(undefined, 'spells');
 
 export const getSpellsPerDayTable = (className: string): ?Array<number[]> => {
   const charClass = getCharClass(className);
@@ -28,9 +25,7 @@ export const getSpellsPerDayTable = (className: string): ?Array<number[]> => {
     return undefined;
   }
 
-  const feature = find(spellFeature, charClass.features);
-  //$FlowFixMe
-  return feature ? feature.table : undefined;
+  return spellFeature(charClass);
 };
 
 export const generateSpellBook = (className: string) => (

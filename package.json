@@ -12,6 +12,7 @@
     "react-scripts": "1.0.14"
   },
   "dependencies": {
+    "gutenberg-web-type": "^1.2.3",
     "lockr": "^0.8.4",
     "ramda": "^0.25.0",
     "react": "^16.0.0",

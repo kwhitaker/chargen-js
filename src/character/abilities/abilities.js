@@ -13,12 +13,7 @@ import {
 } from 'ramda';
 import { genRandomInt } from '../../lib/utils/random-int';
 
-import type {
-  AbilityModTuple,
-  AbilityMod,
-  Abilities,
-  StatTuple
-} from './types';
+import type { AbilityMod, Abilities, StatTuple } from './types';
 
 const abilities: Abilities = require('../../rules/labyrinth-lord/abilities.json');
 
