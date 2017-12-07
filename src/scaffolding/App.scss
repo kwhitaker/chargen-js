@@ -1,6 +1,25 @@
 @import '../lib/scss/include-media';
 
 $dark-grey: #666;
+$light-grey: #ddd;
+
+@mixin info-section {
+  width: 100%;
+  margin: 1.25em 0 1.625em 0;
+  text-transform: capitalize;
+}
+
+@mixin clean-list {
+  margin: 0.5em 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+@mixin zebra-striped {
+  &:nth-child(even) {
+    background-color: $light-grey;
+  }
+}
 
 .app {
   display: flex;
@@ -144,27 +163,20 @@ $dark-grey: #666;
 }
 
 .character-saves {
-  width: 100%;
-  margin: 1.25em 0 0.5em 0;
-  text-transform: capitalize;
+  @include info-section;
 
   .saving-throws {
-    margin: 0.5em 0;
-    padding: 0;
-    list-style: none;
+    @include clean-list;
   }
 
   .saving-throw {
     display: flex;
     justify-content: space-between;
     padding: 0.25em 0.5em;
+    @include zebra-striped;
 
     > * {
       margin: 0;
-    }
-
-    &:nth-child(even) {
-      background-color: #ddd;
     }
   }
 
@@ -177,14 +189,143 @@ $dark-grey: #666;
     .saving-throw {
       flex: 0 1 calc(50% - 14px);
       margin: 5px;
-      border: 1px solid #ddd;
+      border: 1px solid $light-grey;
       background-color: transparent !important;
     }
   }
 }
 
 .character-to-hit {
+  @include info-section;
+
+  .to-hit-matrix {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: flex-start;
+    padding: 0;
+  }
+
+  .to-hit {
+    display: flex;
+    flex: 1 0 calc(25% - 4px);
+    max-width: calc(25% - 4px);
+    flex-direction: column;
+    justify-content: space-around;
+    margin: 5px 2px;
+
+    .to-hit-ac,
+    .to-hit-roll {
+      width: 100%;
+      margin-bottom: 0;
+      padding: 2px 2px;
+      text-align: center;
+    }
+
+    .to-hit-ac {
+      background-color: $light-grey;
+      border-bottom: 1px solid $dark-grey;
+    }
+
+    @include media('>tablet') {
+      flex: 1 0 6.25%;
+      max-width: 6.25%;
+      margin: 0;
+
+      .to-hit-ac {
+        border: none;
+      }
+    }
+  }
+}
+
+.character-spells {
+  @include info-section;
+
+  .spell-list {
+    @include clean-list;
+  }
+
+  .spell-level {
+    padding: 2px 5px;
+    @include zebra-striped;
+  }
+}
+
+.character-skills,
+.character-features,
+.character-money {
+  @include info-section;
+
+  .skill-list,
+  .feature-list,
+  .currency-list {
+    @include clean-list;
+  }
+
+  .skill,
+  .feature {
+    padding: 2px 5px;
+    @include zebra-striped;
+
+    > * {
+      margin-bottom: 0;
+    }
+  }
+
+  .skill {
+    display: flex;
+    justify-content: space-between;
+
+    @include media('>tablet') {
+      display: inherit;
+    }
+  }
+
+  .feature-values {
+    margin-bottom: 0;
+    font-size: 0.825em;
+    font-style: italic;
+  }
+}
+
+.character-money {
+  .currency-list {
+    display: flex;
+  }
+
+  .currency {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 calc(25% - 10px);
+    max-width: calc(25% - 10px);
+    margin: 0 5px;
+    border: 1px solid black;
+
+    .value {
+      display: flex;
+      flex: 1;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      padding: 10px 0;
+      background-color: black;
+      color: white;
+    }
+
+    strong {
+      flex: 0;
+      margin: 0;
+      text-align: center;
+      text-transform: uppercase;
+    }
+  }
+}
+
+.disclaimer {
+  text-align: left;
+  font-size: 0.725em;
+  line-height: 1.5em;
+  margin-bottom: 1em;
   width: 100%;
-  margin: 1.25em 0 0.5em 0;
-  text-transform: capitalize;
 }

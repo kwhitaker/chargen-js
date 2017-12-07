@@ -60,7 +60,7 @@ const setRandomClass = (c: Character): Character => {
     return c;
   }
   const avail = availableClasses(c.abilities);
-  const cClass = avail[genRandomInt(0, avail.length - 1)];
+  const cClass = avail[genRandomInt(0, avail.length)];
   return setClass(cClass.name)(c);
 };
 

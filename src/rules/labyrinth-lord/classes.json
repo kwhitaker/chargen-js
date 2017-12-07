@@ -129,10 +129,6 @@
         "pageNum": 10
       },
       {
-        "name": "detect traps (1-2 on 1d6)",
-        "pageNum": 10
-      },
-      {
         "name": "languages",
         "pageNum": 10,
         "list": ["common", "dwarvish", "alignment", "goblin", "kobold", "gnome"]
@@ -142,6 +138,7 @@
         "pageNum": 10
       }
     ],
+    "skills": [{ "name": "detect traps", "table": [[2]], "type": " in 6" }],
     "progression": [
       [0, 1, 1],
       [2187, 2, 2],
@@ -192,10 +189,6 @@
         "pageNum": 10
       },
       {
-        "name": "detect hidden doors (1-2 on 1d6)",
-        "pageNum": 11
-      },
-      {
         "name": "languages",
         "pageNum": 11,
         "list": ["common", "elvish", "alignment", "gnoll", "hobgoblin", "orc"]
@@ -204,6 +197,9 @@
         "name": "9th level",
         "pageNum": 11
       }
+    ],
+    "skills": [
+      { "name": "detect hidden doors", "table": [[2]], "type": " in 6" }
     ],
     "spells": [
       [1],

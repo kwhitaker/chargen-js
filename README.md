@@ -1,10 +1,15 @@
-# OSR Character Generator
-A straight-forward character generator for the [Labyrinth Lord](https://en.wikipedia.org/wiki/Labyrinth_Lord) RPG.  Depending on how things go, I might add options
-to build characters for other old-school RPGs. I just chose LL because it was easy (and free) for me to get the source materials.
+# Laybrinth Lord Character Generator
+A straight-forward character generator for the [Labyrinth Lord](https://en.wikipedia.org/wiki/Labyrinth_Lord) RPG. I just chose LL because it was easy (and free) for me to get the source materials.
 
-## Warnings
-This is a sandbox project I'm using to play with and learn some things.  The _plan_ is to build this in JSX (something I know pretty well), and then
-replicate it in other languages or frameworks.  As such, anything here is subject to change without warning.  I'll be good and subscribe to semver,
-but I'm not making any promises that its going to be maintained or updated regularly.
+## Scope
+This generator is intentionally limited in scope. This was mostly a way for me to play around with some
+libraries and technology, and I don't know how much work I'll be doing on it after I launch it. That being said, I've built in a lot of functionality which is currently not being used, and could be added.
+
+## Things Which Could be Added/Fixed
+
+[ ] Fix `//$FlowFixMe` areas. These seem to be related to the ramda typings and potential empty return values.
+[ ] Add ability to generate characters of arbitrary levels. The data code is there, but not the UI.
+[ ] Pick equipment for generated characters.
+[ ] Clean-up other areas of the code which I know need some love.
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).

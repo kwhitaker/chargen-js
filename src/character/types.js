@@ -1,6 +1,7 @@
 //@flow
 import type { StatTuple } from './abilities/types';
 import type { SpellList } from './spells/types';
+import type { SkillAtLevel } from './classes/types';
 
 export type Alignment = 'chaos' | 'law' | 'neutral';
 const currencies = {
@@ -28,5 +29,6 @@ export type Character = {
   },
   thaco: ?(number[]),
   saves: ?(number[]),
-  hp: ?number
+  hp: ?number,
+  skills?: SkillAtLevel[]
 };

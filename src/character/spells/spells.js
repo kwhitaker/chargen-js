@@ -1,5 +1,5 @@
 //@flow
-import { assoc, find, propOr, take } from 'ramda';
+import { assoc, propOr, take } from 'ramda';
 import * as shuffle from 'shuffle-array';
 import { getCharClass } from '../classes/character-classes';
 import type { ClassSpells, Spell, SpellBook, SpellList } from './types';
@@ -25,6 +25,7 @@ export const getSpellsPerDayTable = (className: string): ?Array<number[]> => {
     return undefined;
   }
 
+  // $FlowFixMe
   return spellFeature(charClass);
 };
 
