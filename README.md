@@ -1,4 +1,6 @@
 # Laybrinth Lord Character Generator
+
+[Try it yourself!](http://kevin-whitaker.net/chargen)
 A straight-forward character generator for the [Labyrinth Lord](https://en.wikipedia.org/wiki/Labyrinth_Lord) RPG. I just chose LL because it was easy (and free) for me to get the source materials.
 
 ## Scope
